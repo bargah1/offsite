@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>OFFERS</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <style>
+        body {
+            margin-top: 20px;
+            background-color: #FFEFCB;
+            color: #69707a;
+        }
+        header {
+            position: relative;
+            overflow: hidden;
+            height: 60vh; /* Adjust height as needed */
+        }
+        .bg-slider {
+            position: relative; /* Changed to relative */
+            width: 100%;
+            height: 100%;
+            display: flex;
+            animation: slide 15s infinite;
+        }
+        .bg-slider div {
+            flex: 1;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        @keyframes slide {
+            0%, 33.33% { transform: translateX(0); }
+            66.66%, 100% { transform: translateX(-100%); }
+        }
+         .header-custom {
+        background-color: #f2eadf; /* Change this to your desired color */
+        color: white; /* Text color */
+    }
+        .navbar-custom {
+        background-color: #f2eadf; /* Change this to your desired color */
+        color: white; /* Text color */
+    }
+    .navbar-custom .navbar-nav .nav-link {
+        color: white; /* Ensure nav links are readable */
+    }
+    .navbar-custom .navbar-brand {
+        color: white; /* Ensure brand text is readable */
+    }
+        .btn-custom {
+        background-color:#57b6ff; /* Change this to your desired color */
+        color: white; /* Text color */
+        border: none; /* Remove border if desired */
+    }
+
+    .btn-custom:hover {
+        background-color: #00599e; /* Change this to your desired hover color */
+    }
+         .card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        .header-custom .bg-slider {
+        height: 60vh; /* Adjust this value as needed for desired height */
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .header-custom .overlay {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .carousel-inner {
+        height: 60vh; /* Ensure carousel items are also 75vh */
+    }
+       .btn-custom {
+        background-color:#9CD3DB; /* Change this to your desired color */
+        color: white; /* Text color */
+        border: none; /* Remove border if desired */
+    }
+
+    .btn-custom:hover {
+        background-color: #9CA099; /* Change this to your desired hover color */
+        color: white;
+    }
+        .bg-slider {
+    height: 400px; /* Adjust the height as per your design */
+    background-size: cover;
+    background-position: center;
+}
+
+.bg-image {
+    width: 100%;
+    height: 100%;
+}
+    </style>
+</head>
+<body>
+    <!-- Navigation-->
+    {% for i in data %}
+
+<a class="btn btn-custom " href="javascript:history.back()" class="btn btn-secondary btn-sm">Back</a>
+
+    <!-- Header-->
+<header style="background-color: #FFEFCB;" class="header-custom py-5">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="bg-slider bg-image" style="background-image: url('{{ i.photo1.url }}');"></div>
+            </div>
+            <div class="carousel-item">
+                <div class="bg-slider bg-image" style="background-image: url('{{ i.photo2.url }}');"></div>
+            </div>
+            <div class="carousel-item">
+                <div class="bg-slider bg-image" style="background-image: url('{{ i.photo3.url }}');"></div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</header>
+
+
+    <!-- Section-->
+    <br>
+    {% if offers %}
+    <h1 style="text-align: center;">Offers at {{ offers.0.shop.name }}</h1>
+<p style="text-align: center;">Location:    <a href="{{ offers.0.shop.locationlink }}">{{ offers.0.shop.location }}</a>
+</p>
+<p style="text-align: center;">Contact: {{ offers.0.shop.phone }}</p>
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% for j in offers %}
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Product image-->
+                    <img class="card-img-top" src="{{ j.photo.url }}" alt="Product Image" height="250" width="100%"/>
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">{{ j.name }}</h5>
+                            <!-- Product price-->
+                            {{ j.description }}
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{%else%}
+        <h1  style="text-align: center;">No offers are available</h1>
+
+    {% endif %}
+    {% endfor %}
+    <!-- Footer-->
+
+    <!-- Bootstrap core JS-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core theme JS-->
+    <script src="{% static 'js/scripts.js' %}"></script>
+            <p class="m-0 text-center text-#9CD3DB">Copyright &copy; BARGAH.com</p>
+
+</body>
+</html>
